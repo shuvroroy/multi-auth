@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -47,8 +48,10 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        $this->guard()->logout();
+        if (Auth::user()->is_active == 0) {
+            $this->guard()->logout();
 
-        return redirect()->back()->with('success', 'Wait! until our team verified your account.');
+            return redirect()->back()->with('success', 'Wait! until our team verified your account.');
+        }
     }
 }
