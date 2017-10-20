@@ -1,6 +1,6 @@
 # Multi-Auth System
 ======
-#### User
-⋅⋅* Employee
-⋅⋅* Company
-⋅⋅* Admin
+#### User :sparkles:
+	* Employee
+	* Company
+	* Admin
