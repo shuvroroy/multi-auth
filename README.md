@@ -28,5 +28,7 @@ php artisan migrate --seed
 		* Registration
 	3. Admin
 		* Login
+			email: admin@multiauth.dev
+			pass : password
 		* Approval
 		* Reject
