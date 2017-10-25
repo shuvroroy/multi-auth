@@ -22,8 +22,11 @@ php artisan migrate --seed
 	1. Employee
 		* Login
 		* Registration
+		* Profile
 	2. Company
 		* Login
 		* Registration
 	3. Admin
 		* Login
+		* Approval
+		* Reject
