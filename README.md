@@ -1,4 +1,4 @@
-# Multi-Auth System(Laravel)
+# Multi-Auth System(Laravel 5.5)
 
 ## How to install:smiley:
 

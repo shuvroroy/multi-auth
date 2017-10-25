@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use Auth;
 use App\Models\Company;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
@@ -30,13 +31,16 @@ class CompanyAuthController extends Controller
         ]);
 
         // Create the company
-        Company::create([
+        $company = Company::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => bcrypt($request['password'])
         ]);
 
-        return redirect()->back()->with('success', 'Account create successfully. Wait! until our team verified your account.');
+        // Create a profile also
+        $company->profile()->save(new Profile);
+
+        return redirect(route('company.login'))->with('success', 'Account create successfully. Wait! until our team verified your account.');
     }
 
     public function showLoginForm()

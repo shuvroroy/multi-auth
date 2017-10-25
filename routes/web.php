@@ -17,17 +17,14 @@ Route::get('/', function () {
 
 // For Employee Login and Registration
 Auth::routes();
+
+// Homepage after login
 Route::get('/home', 'HomeController@index')->name('employee.home');
 
-// For Admin Login
-Route::prefix('/admin')->group(function () {
-    // Login
-    Route::get('/login', 'Auth\AdminAuthController@showLoginForm')->name('admin.login');
-    Route::post('/login', 'Auth\AdminAuthController@login')->name('admin.login.submit');
-
-    // Homepage after login
-    Route::get('/', 'AdminController@index')->name('admin.home');
-});
+// Employee profile
+Route::get('/{user}/profile', 'HomeController@showProfile')->name('employee.show');
+Route::get('/{user}/profile/edit', 'HomeController@editProfile')->name('employee.edit');
+Route::post('/{user}/profile/update', 'HomeController@updateProfile')->name('employee.update');
 
 // For Company Login and Registration
 Route::prefix('/company')->group(function () {
@@ -41,4 +38,28 @@ Route::prefix('/company')->group(function () {
 
     // Homepage after login
     Route::get('/', 'CompanyController@index')->name('company.home');
+});
+
+// For Admin Login
+Route::prefix('/admin')->group(function () {
+    // Login
+    Route::get('/login', 'Auth\AdminAuthController@showLoginForm')->name('admin.login');
+    Route::post('/login', 'Auth\AdminAuthController@login')->name('admin.login.submit');
+
+    // Homepage after login
+    Route::get('/', 'AdminController@index')->name('admin.home');
+
+    // Show all unapproved companies
+    Route::get('/companies', 'AdminController@showCompanies')->name('admin.companies');
+
+    // Approving and rejecting companies
+    Route::post('/companies/{company}/approve', 'AdminController@approveCompany')->name('admin.companies.approve');
+    Route::post('/companies/{company}/reject', 'AdminController@rejectCompany')->name('admin.companies.reject');
+
+    // Show all unapproved employees
+    Route::get('/employees', 'AdminController@showEmployees')->name('admin.employees');
+
+    // Approving and rejecting employees
+    Route::post('/employees/{employee}/approve', 'AdminController@approveEmployee')->name('admin.employees.approve');
+    Route::post('/employees/{employee}/reject', 'AdminController@rejectEmployee')->name('admin.employees.reject');
 });

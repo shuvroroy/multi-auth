@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
@@ -52,6 +53,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'gender' => 'required|bool',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -64,11 +66,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        if ($data['gender']) {
+            $avatar = 'uploads/defaults/avatars/male.png';
+        } else {
+            $avatar = 'uploads/defaults/avatars/female.png';
+        }
+
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'gender' => $data['gender'],
+            'avatar'   => $avatar,
             'password' => bcrypt($data['password']),
         ]);
+
+        // Create a profile also
+        $user->profile()->save(new Profile);
+        return $user;
     }
 
     /**
@@ -82,6 +96,6 @@ class RegisterController extends Controller
     {
         $this->guard()->logout();
 
-        return redirect($this->redirectPath())->with('success', 'Account create successfully. Wait! until our team verified your account.');
+        return redirect(route('login'))->with('success', 'Account create successfully. Wait! until our team verified your account.');
     }
 }
