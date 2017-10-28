@@ -55,9 +55,9 @@ class HomeController extends Controller
             // Save the image
             $featured          = $request->avatar;
             $featured_new_name = time() . $featured->getClientOriginalName();
-            $featured->move('uploads/custom/avatars/', $featured_new_name);
+            $featured->move('uploads/custom/avatars/employee', $featured_new_name);
 
-            $user->avatar = 'uploads/custom/avatars/' . $featured_new_name;
+            $user->avatar = 'uploads/custom/avatars/employee' . $featured_new_name;
             $user->save();
         }
 

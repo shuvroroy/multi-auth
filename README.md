@@ -22,10 +22,11 @@ php artisan migrate --seed
 	1. Employee
 		* Login
 		* Registration
-		* Profile
+		* Profile (Edit & Update)
 	2. Company
 		* Login
 		* Registration
+		* Profile (Edit & Update)
 	3. Admin
 		* Login
 			email: admin@multiauth.dev

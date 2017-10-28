@@ -38,6 +38,11 @@ Route::prefix('/company')->group(function () {
 
     // Homepage after login
     Route::get('/', 'CompanyController@index')->name('company.home');
+
+    // Company profile
+    Route::get('/{company}/profile', 'CompanyController@showProfile')->name('company.show');
+    Route::get('/{company}/profile/edit', 'CompanyController@editProfile')->name('company.edit');
+    Route::post('/{company}/profile/update', 'CompanyController@updateProfile')->name('company.update');
 });
 
 // For Admin Login

@@ -55,9 +55,14 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    @if(Auth::guard())
+                                    @if(Auth::guard('web')->user() == auth()->user())
                                         <li><a href="{{ route('employee.show', auth()->user()) }}">My Profile</a></li>
                                     @endif
+
+                                    @if(Auth::guard('company')->user() == auth()->user())
+                                        <li><a href="{{ route('company.show', auth()->user()) }}">My Profile</a></li>
+                                    @endif
+
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();

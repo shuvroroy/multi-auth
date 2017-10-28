@@ -18,6 +18,7 @@ class CreateCompaniesTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('slug');
+            $table->string('logo')->default('/uploads/defaults/logo/logo.jpg');
             $table->string('password');
             $table->boolean('is_active')->default(0);
             $table->rememberToken();
