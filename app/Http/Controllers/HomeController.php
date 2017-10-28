@@ -34,11 +34,17 @@ class HomeController extends Controller
 
     public function editProfile(User $user)
     {
+        // Authorization
+        $this->authorize('touchUser', $user->profile);
+
         return view('employee.editprofile', compact('user'));
     }
 
     public function updateProfile(Request $request, User $user)
     {
+        // Authorization
+        $this->authorize('touchUser', $user->profile);
+
         $user->profile()->update([
             'address' => $request->address,
             'phone' => $request->phone,

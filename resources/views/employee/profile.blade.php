@@ -41,11 +41,12 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <h1>{{ $user->name }}'s profile
-                         <span class="pull-right">
-                            <a href="{{ route('employee.edit', $user) }}" class="btn btn-primary">Edit Profile</a>
-                        </span>
+                        @can('touchUser', $user->profile)
+                            <span class="pull-right">
+                                <a href="{{ route('employee.edit', $user) }}" class="btn btn-primary">Edit Profile</a>
+                            </span>
+                        @endcan
                     </h1>
-
                 </div>
             </div>
         </div>
