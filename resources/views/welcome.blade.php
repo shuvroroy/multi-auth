@@ -46,7 +46,7 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 74px;
             }
 
             .links > a {
@@ -79,7 +79,9 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Multi Authentication System
+                    <br>
+                    Laravel 5.5
                 </div>
 
                 <div class="links">

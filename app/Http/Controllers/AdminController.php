@@ -73,7 +73,7 @@ class AdminController extends Controller
      */
     public function approveEmployee(User $employee)
     {
-        $employee->is_active = true;
+        $employee->is_active = 1;
         $employee->save();
 
         return back()->withSuccess("{$employee->name} employee has been approved successfully");
